@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Home - <%= siteData.siteName %></title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>Welcome to <%= siteData.siteName %></h1>
+    <p>Track your health and fitness activities in one place.</p>
+
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/search">Search all activities</a></li>
+      <% if (!session || !session.userId) { %>
+        <li><a href="/users/register">Register</a></li>
+        <li><a href="/users/login">Login</a></li>
+      <% } else { %>
+        <li><a href="/entries/add">Add Activity</a></li>
+        <li><a href="/entries/my">My Activities</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </body>
+</html>

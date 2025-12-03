@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Search - <%= siteData.siteName %></title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>Search Activities</h1>
+    <form action="/search_results" method="GET">
+      <label for="term">Search term:</label>
+      <input id="term" type="text" name="term" />
+      <input type="submit" value="Search" />
+    </form>
+    <p><a href="/">Back to home</a></p>
+  </body>
+</html>

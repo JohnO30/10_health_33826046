@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %> - <%= siteData.siteName %></title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <header>
+      <h1><%= siteData.siteName %></h1>
+      <nav>
+        <a href="/">Home</a> |
+        <a href="/about">About</a> |
+        <a href="/search">Search</a> |
+        <% if (!session || !session.userId) { %>
+          <a href="/users/register">Register</a> |
+          <a href="/users/login">Login</a>
+        <% } else { %>
+          <a href="/entries/add">Add Activity</a> |
+          <a href="/entries/my">My Activities</a> |
+          <a href="/users/logout">Logout</a>
+        <% } %>
+      </nav>
+      <% if (session && session.username) { %>
+        <p>Logged in as <strong><%= session.username %></strong></p>
+      <% } %>
+    </header>
+
+    <main>
+      <%- body %>
+    </main>
+  </body>
+</html>

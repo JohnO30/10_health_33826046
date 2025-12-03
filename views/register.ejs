@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Register - <%= siteData.siteName %></title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>Register</h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <ul class="error-list">
+        <% errors.forEach(function(err) { %>
+          <li><%= err.msg %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+    <form method="POST" action="/users/registered">
+      <label>First name:
+        <input type="text" name="first" value="<%= formData.first || '' %>" />
+      </label><br/>
+      <label>Last name:
+        <input type="text" name="last" value="<%= formData.last || '' %>" />
+      </label><br/>
+      <label>Email:
+        <input type="email" name="email" value="<%= formData.email || '' %>" />
+      </label><br/>
+      <label>Username:
+        <input type="text" name="username" value="<%= formData.username || '' %>" />
+      </label><br/>
+      <label>Password:
+        <input type="password" name="password" />
+      </label><br/>
+      <input type="submit" value="Register" />
+    </form>
+
+    <p><a href="/">Home</a></p>
+  </body>
+</html>

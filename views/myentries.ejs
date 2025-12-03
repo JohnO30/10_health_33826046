@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Activities - <%= siteData.siteName %></title>
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <h1>My Activities</h1>
+
+    <% if (!entries || entries.length === 0) { %>
+      <p>You have no activities yet.</p>
+    <% } else { %>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Activity</th>
+          <th>Duration (min)</th>
+          <th>Intensity</th>
+          <th>Notes</th>
+        </tr>
+        <% entries.forEach(function(e) { %>
+          <tr>
+            <td><%= e.date.toISOString().slice(0,10) %></td>
+            <td><%= e.activity_type %></td>
+            <td><%= e.duration_minutes %></td>
+            <td><%= e.intensity %></td>
+            <td><%= e.notes %></td>
+          </tr>
+        <% }); %>
+      </table>
+    <% } %>
+
+    <p><a href="/entries/add">Add another activity</a></p>
+    <p><a href="/">Home</a></p>
+  </body>
+</html>
