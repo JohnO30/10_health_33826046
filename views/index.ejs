@@ -1,24 +1,23 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Home - <%= siteData.siteName %></title>
-    <link rel="stylesheet" href="/main.css" />
-  </head>
-  <body>
-    <h1>Welcome to <%= siteData.siteName %></h1>
-    <p>Track your health and fitness activities in one place.</p>
+<h2>Welcome to <%= siteData.siteName %>!</h2>
 
-    <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/search">Search all activities</a></li>
-      <% if (!session || !session.userId) { %>
-        <li><a href="/users/register">Register</a></li>
-        <li><a href="/users/login">Login</a></li>
-      <% } else { %>
-        <li><a href="/entries/add">Add Activity</a></li>
-        <li><a href="/entries/my">My Activities</a></li>
-        <li><a href="/users/logout">Logout</a></li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<% if (session && session.userId) { %>
+  <div class="welcome-message">
+    Welcome back, <strong><%= session.username %></strong>! What amazing fitness achievement will you log today?
+  </div>
+  
+  <p><%= siteData.siteName %> helps you easily log and track your fitness achievements.</p>
+  
+  <a href="/entries/add" class="btn">Log New Activity</a>
+  <a href="/entries/my" class="btn btn-secondary">View My Activities</a>
+<% } else { %>
+  <p>Track your health and fitness activities in one place.</p>
+  <p>Please <a href="/users/login">login</a> or <a href="/users/register">register</a> to get started.</p>
+<% } %>
+
+<h3>Application Features Overview</h3>
+<ul class="features-list">
+  <li><strong>Secure Login:</strong> Uses password hashing ('bcrypt') and session management.</li>
+  <li><strong>Data Logging:</strong> Dedicated form for storing activity details in MySQL.</li>
+  <li><strong>Search & History:</strong> Easily filter and review past achievements.</li>
+  <li><strong>Validation:</strong> Input checks to ensure data accuracy.</li>
+</ul>

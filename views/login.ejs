@@ -1,26 +1,19 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Login - <%= siteData.siteName %></title>
-    <link rel="stylesheet" href="/main.css" />
-  </head>
-  <body>
-    <h1>Login</h1>
+<h2>User Login</h2>
 
-    <% if (error) { %>
-      <p class="error"><%= error %></p>
-    <% } %>
+<% if (error) { %>
+    <div class="error">
+        <%= error %>
+    </div>
+<% } %>
 
-    <form method="POST" action="/users/loggedin">
-      <label>Username:
-        <input type="text" name="username" />
-      </label><br/>
-      <label>Password:
-        <input type="password" name="password" />
-      </label><br/>
-      <input type="submit" value="Login" />
-    </form>
+<form action="/users/login" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
 
-    <p><a href="/">Home</a></p>
-  </body>
-</html>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="Login">
+</form>
+
+<p>Don't have an account? <a href="/users/register">Register here</a>.</p>

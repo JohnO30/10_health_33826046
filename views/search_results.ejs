@@ -1,0 +1,28 @@
+<h2>Search Results for "<%= keyword %>"</h2>
+
+<% if (!results || results.length === 0) { %>
+  <p>No matching activities found.</p>
+<% } else { %>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>User</th>
+      <th>Activity</th>
+      <th>Duration (min)</th>
+      <th>Intensity</th>
+      <th>Notes</th>
+    </tr>
+    <% results.forEach(function(e) { %>
+      <tr>
+        <td><%= e.date %></td>
+        <td><%= e.username %></td>
+        <td><%= e.activity_type %></td>
+        <td><%= e.duration_minutes %></td>
+        <td><%= e.intensity %></td>
+        <td><%= e.notes %></td>
+      </tr>
+    <% }); %>
+  </table>
+<% } %>
+
+<p><a href="/search">Back to search</a></p>

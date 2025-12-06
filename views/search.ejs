@@ -1,16 +1,19 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Search - <%= siteData.siteName %></title>
-    <link rel="stylesheet" href="/main.css" />
-  </head>
-  <body>
-    <h1>Search Activities</h1>
-    <form action="/search_results" method="GET">
-      <label for="term">Search term:</label>
-      <input id="term" type="text" name="term" />
-      <input type="submit" value="Search" />
-    </form>
-    <p><a href="/">Back to home</a></p>
-  </body>
-</html>
+<h2>Search Activities</h2>
+
+<form action="/search" method="POST">
+    <label for="keyword">Search by keyword:</label>
+    <input type="text" id="keyword" name="keyword" placeholder="e.g., running, gym" required>
+    
+    <input type="submit" value="Search">
+</form>
+
+<script>
+    // Set the selected search type if it was passed in the query
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('search_type');
+        if (type) {
+            document.getElementById('search_type').value = type;
+        }
+    });
+</script>

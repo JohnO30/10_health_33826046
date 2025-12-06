@@ -1,48 +1,47 @@
 const express = require('express');
 const router = express.Router();
 
-// Home page
+// Home route
 router.get('/', (req, res) => {
   res.render('index', {
     title: 'Home'
   });
 });
 
-// About page
+// About route
 router.get('/about', (req, res) => {
   res.render('about', {
     title: 'About'
   });
 });
 
-// Search form
+// Search route (GET - display form)
 router.get('/search', (req, res) => {
   res.render('search', {
     title: 'Search Activities'
   });
 });
 
-// Search results (GET, like Lab 5 search_result) 
-router.get('/search_results', (req, res, next) => {
-  let term = req.sanitize(req.query.term || '');
-  let likeTerm = '%' + term + '%';
-
-  let sql = `
-    SELECT h.*, u.username
-    FROM health_entries h
-    JOIN users u ON h.user_id = u.id
-    WHERE h.activity_type LIKE ? OR h.notes LIKE ?
-    ORDER BY h.date DESC
+// Search route (POST - display results)
+router.post('/search', (req, res, next) => {
+  const keyword = req.sanitize(req.body.keyword);
+  
+  const sql = `
+    SELECT he.*, u.username 
+    FROM health_entries he
+    JOIN users u ON he.user_id = u.id
+    WHERE he.activity_type LIKE ? OR he.notes LIKE ?
+    ORDER BY he.date DESC
   `;
-
-  db.query(sql, [likeTerm, likeTerm], (err, result) => {
-    if (err) {
-      return next(err);
-    }
+  
+  const searchTerm = `%${keyword}%`;
+  
+  db.query(sql, [searchTerm, searchTerm], (err, results) => {
+    if (err) return next(err);
     res.render('search_results', {
       title: 'Search Results',
-      term: term,
-      entries: result
+      keyword: keyword,
+      results: results
     });
   });
 });

@@ -1,6 +1,7 @@
 // Import modules
 var express = require('express');
 var ejs = require('ejs');
+var expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 var mysql = require('mysql2');
 require('dotenv').config();
@@ -12,6 +13,10 @@ const port = 8000;
 
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
+
+// Use express-ejs-layouts
+app.use(expressLayouts);
+app.set('layout', 'layout');
 
 // Static files (CSS, images, client-side JS)
 app.use(express.static(path.join(__dirname, 'public')));

@@ -1,41 +1,29 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Add Activity - <%= siteData.siteName %></title>
-    <link rel="stylesheet" href="/main.css" />
-  </head>
-  <body>
-    <h1>Add Activity</h1>
+<h2>Add Activity</h2>
 
-    <form method="POST" action="/entries/added">
-      <label>Date:
-        <input type="date" name="date" required />
-      </label><br/>
+<form method="POST" action="/entries/added">
+  <label>Date:
+    <input type="date" name="date" required />
+  </label><br/>
 
-      <label>Activity type:
-        <input type="text" name="activity_type" placeholder="e.g. Running, Cycling" required />
-      </label><br/>
+  <label>Activity type:
+    <input type="text" name="activity_type" placeholder="e.g. Running, Cycling" required />
+  </label><br/>
 
-      <label>Duration (minutes):
-        <input type="number" name="duration_minutes" min="0" />
-      </label><br/>
+  <label>Duration (minutes):
+    <input type="number" name="duration_minutes" min="0" />
+  </label><br/>
 
-      <label>Intensity:
-        <select name="intensity">
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-        </select>
-      </label><br/>
+  <label>Intensity:
+    <select name="intensity">
+      <option value="Low">Low</option>
+      <option value="Moderate">Moderate</option>
+      <option value="High">High</option>
+    </select>
+  </label><br/>
 
-      <label>Notes:
-        <textarea name="notes"></textarea>
-      </label><br/>
+  <label>Notes:
+    <textarea name="notes"></textarea>
+  </label><br/>
 
-      <input type="submit" value="Save Activity" />
-    </form>
-
-    <p><a href="/entries/my">My Activities</a></p>
-    <p><a href="/">Home</a></p>
-  </body>
-</html>
+  <input type="submit" value="Save Activity" />
+</form>

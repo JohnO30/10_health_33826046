@@ -1,36 +1,28 @@
-<!doctype html>
-<html>
-  <head>
-    <title>My Activities - <%= siteData.siteName %></title>
-    <link rel="stylesheet" href="/main.css" />
-  </head>
-  <body>
-    <h1>My Activities</h1>
+<h2>My Activities</h2>
 
-    <% if (!entries || entries.length === 0) { %>
-      <p>You have no activities yet.</p>
-    <% } else { %>
-      <table>
+<% if (entries && entries.length > 0) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Activity Type</th>
+        <th>Duration (mins)</th>
+        <th>Intensity</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% entries.forEach(entry => { %>
         <tr>
-          <th>Date</th>
-          <th>Activity</th>
-          <th>Duration (min)</th>
-          <th>Intensity</th>
-          <th>Notes</th>
+          <td><%= entry.date %></td>
+          <td><%= entry.activity_type %></td>
+          <td><%= entry.duration_minutes %></td>
+          <td><%= entry.intensity %></td>
+          <td><%= entry.notes %></td>
         </tr>
-        <% entries.forEach(function(e) { %>
-          <tr>
-            <td><%= e.date.toISOString().slice(0,10) %></td>
-            <td><%= e.activity_type %></td>
-            <td><%= e.duration_minutes %></td>
-            <td><%= e.intensity %></td>
-            <td><%= e.notes %></td>
-          </tr>
-        <% }); %>
-      </table>
-    <% } %>
-
-    <p><a href="/entries/add">Add another activity</a></p>
-    <p><a href="/">Home</a></p>
-  </body>
-</html>
+      <% }) %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No activities logged yet. <a href="/entries/add">Add your first activity</a>.</p>
+<% } %>

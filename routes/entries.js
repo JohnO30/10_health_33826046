@@ -56,7 +56,7 @@ router.get('/my', redirectLogin, (req, res, next) => {
     'SELECT * FROM health_entries WHERE user_id = ? ORDER BY date DESC';
   db.query(sql, [userId], (err, result) => {
     if (err) return next(err);
-    res.render('my_entries', {
+    res.render('myentries', {
       title: 'My Activities',
       entries: result
     });
