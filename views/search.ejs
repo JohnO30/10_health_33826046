@@ -1,17 +1,26 @@
+<<!-- Page heading for activity search functionality -->
 <h2>Search Activities</h2>
 
+<!-- Search form - POST request to /search route -->
 <form action="/search" method="POST">
+    <!-- Keyword input field for searching activities -->
     <label for="keyword">Search by keyword:</label>
     <input type="text" id="keyword" name="keyword" placeholder="e.g., running, gym" required>
     
+    <!-- Submit button to execute search -->
     <input type="submit" value="Search">
 </form>
 
+<!-- Client-side JavaScript for handling URL parameters -->
 <script>
-    // Set the selected search type if it was passed in the query
+    // Set the selected search type if it was passed in the query string
+    // Wait for DOM to fully load before executing
     document.addEventListener('DOMContentLoaded', () => {
+        // Parse URL query parameters
         const urlParams = new URLSearchParams(window.location.search);
+        // Get the 'search_type' parameter from URL
         const type = urlParams.get('search_type');
+        // If search_type exists, pre-populate the search_type field
         if (type) {
             document.getElementById('search_type').value = type;
         }

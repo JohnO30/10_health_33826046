@@ -1,19 +1,26 @@
+<!-- Page heading for user login -->
 <h2>User Login</h2>
 
+<!-- Error message display - shown conditionally if login fails -->
 <% if (error) { %>
     <div class="error">
         <%= error %>
     </div>
 <% } %>
 
+<!-- Login form - POST request to /users/login route -->
 <form action="/users/login" method="POST">
+    <!-- Username input field - required for authentication -->
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
 
+    <!-- Password input field - masked for security, required -->
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
 
+    <!-- Submit button to process login -->
     <input type="submit" value="Login">
 </form>
 
+<!-- Link to registration page for new users -->
 <p>Don't have an account? <a href="/users/register">Register here</a>.</p>

@@ -1,18 +1,26 @@
+<!-- Page heading for adding a new activity entry -->
 <h2>Add Activity</h2>
 
+<!-- Form to submit new activity data to the server -->
+<!-- POST request to /entries/added route -->
 <form method="POST" action="/entries/added">
+  
+  <!-- Date input field - required field for activity date -->
   <label>Date:
     <input type="date" name="date" required />
   </label><br/>
 
+  <!-- Activity type input - text field for type of activity (e.g., Running, Cycling) -->
   <label>Activity type:
     <input type="text" name="activity_type" placeholder="e.g. Running, Cycling" required />
   </label><br/>
 
+  <!-- Duration input - number field to specify activity length in minutes -->
   <label>Duration (minutes):
     <input type="number" name="duration_minutes" min="0" />
   </label><br/>
 
+  <!-- Intensity dropdown - allows user to select activity intensity level -->
   <label>Intensity:
     <select name="intensity">
       <option value="Low">Low</option>
@@ -21,9 +29,11 @@
     </select>
   </label><br/>
 
+  <!-- Notes text area - optional field for additional comments about the activity -->
   <label>Notes:
     <textarea name="notes"></textarea>
   </label><br/>
 
+  <!-- Submit button to save the activity entry -->
   <input type="submit" value="Save Activity" />
 </form>

@@ -1,9 +1,14 @@
+<!-- Page heading displaying the search keyword entered by user -->
 <h2>Search Results for "<%= keyword %>"</h2>
 
+<!-- Conditional rendering - check if results array is empty or doesn't exist -->
 <% if (!results || results.length === 0) { %>
+  <!-- Message displayed when no matching activities are found -->
   <p>No matching activities found.</p>
 <% } else { %>
+  <!-- Table to display search results in structured format -->
   <table>
+    <!-- Table header row with column titles -->
     <tr>
       <th>Date</th>
       <th>User</th>
@@ -12,7 +17,9 @@
       <th>Intensity</th>
       <th>Notes</th>
     </tr>
+    <!-- Loop through each result in the results array -->
     <% results.forEach(function(e) { %>
+      <!-- Display each result as a table row with activity details -->
       <tr>
         <td><%= e.date %></td>
         <td><%= e.username %></td>
@@ -25,4 +32,5 @@
   </table>
 <% } %>
 
+<!-- Navigation link to return to the search page -->
 <p><a href="/search">Back to search</a></p>

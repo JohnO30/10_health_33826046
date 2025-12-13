@@ -1,23 +1,38 @@
+<!-- Main welcome heading - displays dynamic site name from siteData object -->
 <h2>Welcome to <%= siteData.siteName %>!</h2>
 
+<!-- Conditional rendering based on user authentication status -->
+<!-- Check if session exists and user is logged in -->
 <% if (session && session.userId) { %>
+  <!-- Content shown to logged-in users -->
+  
+  <!-- Personalized welcome message displaying username from session -->
   <div class="welcome-message">
     Welcome back, <strong><%= session.username %></strong>! What amazing fitness achievement will you log today?
   </div>
   
+  <!-- Description of application purpose -->
   <p><%= siteData.siteName %> helps you easily log and track your fitness achievements.</p>
   
+  <!-- Primary action buttons for logged-in users -->
   <a href="/entries/add" class="btn">Log New Activity</a>
   <a href="/entries/my" class="btn btn-secondary">View My Activities</a>
 <% } else { %>
+  <!-- Content shown to non-authenticated users -->
   <p>Track your health and fitness activities in one place.</p>
+  <!-- Prompt to login or register with links to respective pages -->
   <p>Please <a href="/users/login">login</a> or <a href="/users/register">register</a> to get started.</p>
 <% } %>
 
+<!-- Features section highlighting key application capabilities -->
 <h3>Application Features Overview</h3>
 <ul class="features-list">
+  <!-- Security feature - password protection and session handling -->
   <li><strong>Secure Login:</strong> Uses password hashing ('bcrypt') and session management.</li>
+  <!-- Data management feature - activity entry storage -->
   <li><strong>Data Logging:</strong> Dedicated form for storing activity details in MySQL.</li>
+  <!-- Search functionality - filtering and viewing historical data -->
   <li><strong>Search & History:</strong> Easily filter and review past achievements.</li>
+  <!-- Data integrity feature - input validation -->
   <li><strong>Validation:</strong> Input checks to ensure data accuracy.</li>
 </ul>
