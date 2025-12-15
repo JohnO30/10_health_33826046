@@ -1,0 +1,7 @@
+home=https://www.doc.gold.ac.uk/usr/260/
+about=https://www.doc.gold.ac.uk/usr/260/about
+search=https://www.doc.gold.ac.uk/usr/260/search
+register=https://www.doc.gold.ac.uk/usr/260/users/register
+login=https://www.doc.gold.ac.uk/usr/260/users/login
+add_activity=https://www.doc.gold.ac.uk/usr/260/entries/add
+my_activities=https://www.doc.gold.ac.uk/usr/260/entries/my
