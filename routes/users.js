@@ -6,15 +6,15 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const router = express.Router();
 
-// Base URL from environment variable
-const BASE_URL = process.env.HEALTH_BASE_PATH || '/'; 
+// Base URL from environment variable (empty for local, /usr/260 on VM)
+const BASE_URL = process.env.HEALTH_BASE_PATH || ''; 
 
 // --- Security Middleware Functions ---
 
 // Middleware to redirect to login if user is not logged in
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect('/users/login');
+    res.redirect(`${BASE_URL}/users/login`);
   } else {
     next();
   }
@@ -94,7 +94,7 @@ router.post('/registered',
         res.send(`
           <h2>Registration Successful</h2>
           <p>User ${req.body.username} has been registered successfully!</p>
-          <p><a href="/users/login">Login here</a> or <a href="/">Go to Home</a></p>
+          <p><a href="${BASE_URL}/users/login">Login here</a> or <a href="${BASE_URL}">Go to Home</a></p>
         `);
       });
 
@@ -151,7 +151,7 @@ router.get('/logout', redirectLogin, (req, res, next) => {
     res.send(`
       <h2>Logout Successful</h2>
       <p>You have been successfully logged out.</p>
-      <p><a href="/">Go to Home</a></p>
+      <p><a href="${BASE_URL}">Go to Home</a></p>
     `);
   });
 });

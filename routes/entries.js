@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-// Base URL from environment variable
-const BASE_URL = process.env.HEALTH_BASE_PATH || '/';
+// Base URL from environment variable (empty for local, /usr/260 on VM)
+const BASE_URL = process.env.HEALTH_BASE_PATH || '';
 
 // Local middleware to require login
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect('/users/login');
+    res.redirect(`${BASE_URL}/users/login`);
   } else {
     next();
   }
@@ -47,7 +47,7 @@ router.post('/added', redirectLogin, (req, res, next) => {
   db.query(sql, params, (err, result) => {
     if (err) return next(err);
     res.send(
-      'Activity saved! <a href="/entries/my">View my activities</a> or <a href="/">Home</a>'
+      `Activity saved! <a href="${BASE_URL}/entries/my">View my activities</a> or <a href="${BASE_URL}">Home</a>`
     );
   });
 });

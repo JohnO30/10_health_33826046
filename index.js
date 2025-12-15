@@ -66,9 +66,12 @@ const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/users');
 const entryRoutes = require('./routes/entries');
 
-app.use('/', mainRoutes);
-app.use('/users', userRoutes);
-app.use('/entries', entryRoutes);
+// Base URL configuration (empty for local, /usr/260 on VM)
+const BASE_URL = process.env.HEALTH_BASE_PATH || '';
+
+app.use(BASE_URL, mainRoutes);
+app.use(`${BASE_URL}/users`, userRoutes);
+app.use(`${BASE_URL}/entries`, entryRoutes);
 
 // Start listening
 app.listen(port, () => {
