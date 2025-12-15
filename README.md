@@ -105,6 +105,13 @@ A dynamic web application for tracking personal health and fitness activities, b
    - **Locally**: Open your browser and navigate to `http://localhost:8000`
    - **On VM**: Navigate to `https://www.doc.gold.ac.uk/usr/260/`
 
+## Test Credentials
+
+For testing purposes, you can use the following pre-configured account:
+
+- **Username**: gold
+- **Password**: smiths123ABC$
+
 ## Project Structure
 
 ```
