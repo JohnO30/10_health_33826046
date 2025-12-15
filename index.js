@@ -69,6 +69,12 @@ const entryRoutes = require('./routes/entries');
 // Base URL configuration (empty for local, /usr/260 on VM)
 const BASE_URL = process.env.HEALTH_BASE_PATH || '';
 
+// Make BASE_URL available in all views
+app.use((req, res, next) => {
+  res.locals.BASE_URL = BASE_URL;
+  next();
+});
+
 app.use(BASE_URL, mainRoutes);
 app.use(`${BASE_URL}/users`, userRoutes);
 app.use(`${BASE_URL}/entries`, entryRoutes);

@@ -14,7 +14,7 @@ const BASE_URL = process.env.HEALTH_BASE_PATH || '';
 // Middleware to redirect to login if user is not logged in
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect(`${BASE_URL}/users/login`);
+    res.redirect(BASE_URL + '/users/login');
   } else {
     next();
   }
@@ -134,7 +134,7 @@ router.post('/login', async (req, res, next) => {
     if (match) {
       req.session.userId = user.id;
       req.session.username = username;
-      res.redirect(BASE_URL);
+      res.redirect('/');
     } else {
       res.render('login', {
         title: 'Login',

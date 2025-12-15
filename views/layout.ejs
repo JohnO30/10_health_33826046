@@ -5,7 +5,7 @@
     <!-- Dynamic page title: page-specific title + site name -->
     <title><%= title %> - <%= siteData.siteName %></title>
     <!-- Link to external CSS stylesheet for styling -->
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>/main.css" />
   </head>
   <body>
     <!-- Header section containing site branding and navigation -->
@@ -16,20 +16,20 @@
       <!-- Main navigation menu -->
       <nav>
         <!-- Public navigation links available to all users -->
-        <a href="/">Home</a> |
-        <a href="/about">About</a> |
-        <a href="/search">Search</a> |
+        <a href="<%= BASE_URL %>/">Home</a> |
+        <a href="<%= BASE_URL %>/about">About</a> |
+        <a href="<%= BASE_URL %>/search">Search</a> |
         
         <!-- Conditional navigation based on authentication status -->
         <% if (!session || !session.userId) { %>
           <!-- Links shown to non-authenticated users -->
-          <a href="/users/register">Register</a> |
-          <a href="/users/login">Login</a>
+          <a href="<%= BASE_URL %>/users/register">Register</a> |
+          <a href="<%= BASE_URL %>/users/login">Login</a>
         <% } else { %>
           <!-- Links shown to authenticated users -->
-          <a href="/entries/add">Add Activity</a> |
-          <a href="/entries/my">My Activities</a> |
-          <a href="/users/logout">Logout</a>
+          <a href="<%= BASE_URL %>/entries/add">Add Activity</a> |
+          <a href="<%= BASE_URL %>/entries/my">My Activities</a> |
+          <a href="<%= BASE_URL %>/users/logout">Logout</a>
         <% } %>
       </nav>
       

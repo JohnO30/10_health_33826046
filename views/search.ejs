@@ -2,7 +2,7 @@
 <h2>Search Activities</h2>
 
 <!-- Search form - POST request to /search route -->
-<form action="/search" method="POST">
+<form action="<%= BASE_URL %>/search" method="POST">
     <!-- Keyword input field for searching activities -->
     <label for="keyword">Search by keyword:</label>
     <input type="text" id="keyword" name="keyword" placeholder="e.g., running, gym" required>

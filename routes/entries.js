@@ -7,7 +7,7 @@ const BASE_URL = process.env.HEALTH_BASE_PATH || '';
 // Local middleware to require login
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect(`${BASE_URL}/users/login`);
+    res.redirect(BASE_URL + '/users/login');
   } else {
     next();
   }

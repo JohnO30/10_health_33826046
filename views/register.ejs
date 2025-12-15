@@ -15,7 +15,7 @@
 <% } %>
 
 <!-- Registration form - POST request to /users/registered route -->
-<form action="/users/registered" method="POST">
+<form action="<%= BASE_URL %>/users/registered" method="POST">
     <!-- Username input - must be between 2-20 characters -->
     <label for="username">Username (2-20 chars):</label>
     <input type="text" id="username" name="username" required>

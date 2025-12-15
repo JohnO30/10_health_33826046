@@ -9,7 +9,7 @@
 <% } %>
 
 <!-- Login form - POST request to /users/login route -->
-<form action="/users/login" method="POST">
+<form action="<%= BASE_URL %>/users/login" method="POST">
     <!-- Username input field - required for authentication -->
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
@@ -23,4 +23,4 @@
 </form>
 
 <!-- Link to registration page for new users -->
-<p>Don't have an account? <a href="/users/register">Register here</a>.</p>
+<p>Don't have an account? <a href="<%= BASE_URL %>/users/register">Register here</a>.</p>

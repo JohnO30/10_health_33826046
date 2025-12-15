@@ -15,13 +15,13 @@
   <p><%= siteData.siteName %> helps you easily log and track your fitness achievements.</p>
   
   <!-- Primary action buttons for logged-in users -->
-  <a href="/entries/add" class="btn">Log New Activity</a>
-  <a href="/entries/my" class="btn btn-secondary">View My Activities</a>
+  <a href="<%= BASE_URL %>/entries/add" class="btn">Log New Activity</a>
+  <a href="<%= BASE_URL %>/entries/my" class="btn btn-secondary">View My Activities</a>
 <% } else { %>
   <!-- Content shown to non-authenticated users -->
   <p>Track your health and fitness activities in one place.</p>
   <!-- Prompt to login or register with links to respective pages -->
-  <p>Please <a href="/users/login">login</a> or <a href="/users/register">register</a> to get started.</p>
+  <p>Please <a href="<%= BASE_URL %>/users/login">login</a> or <a href="<%= BASE_URL %>/users/register">register</a> to get started.</p>
 <% } %>
 
 <!-- Features section highlighting key application capabilities -->
