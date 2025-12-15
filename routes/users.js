@@ -1,8 +1,13 @@
+
+
 // Dependencies
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-const router = express.Router(); 
+const router = express.Router();
+
+// Base URL from environment variable
+const BASE_URL = process.env.HEALTH_BASE_PATH || '/'; 
 
 // --- Security Middleware Functions ---
 
@@ -129,7 +134,7 @@ router.post('/login', async (req, res, next) => {
     if (match) {
       req.session.userId = user.id;
       req.session.username = username;
-      res.redirect('/');
+      res.redirect(BASE_URL);
     } else {
       res.render('login', {
         title: 'Login',
