@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+// Base URL from environment variable
+const BASE_URL = process.env.HEALTH_BASE_PATH || '/';
+
 // Local middleware to require login
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {

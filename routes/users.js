@@ -23,7 +23,7 @@ const redirectLogin = (req, res, next) => {
 // Middleware to redirect to home if user is already logged in
 const redirectHome = (req, res, next) => {
   if (req.session.userId) {
-    res.redirect('/');
+    res.redirect(BASE_URL);
   } else {
     next();
   }
