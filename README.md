@@ -57,7 +57,7 @@ A dynamic web application for tracking personal health and fitness activities, b
 
 1. **Clone or download the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/JohnO30/10_health_33826046
    cd 10_health_33826046
    ```
 
