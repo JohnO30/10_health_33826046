@@ -5,7 +5,6 @@ var expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 var mysql = require('mysql2');
 require('dotenv').config();
-console.log(process.env.HEALTH_USER);
 var session = require('express-session');
 const expressSanitizer = require('express-sanitizer');
 
