@@ -34,7 +34,7 @@ A dynamic web application for tracking personal health and fitness activities, b
 ## Available Routes
 
 ### Web Pages
-- `/` - Home page with navigation links
+- `/` (or `/usr/260/` on VM) - Home page with navigation links
 - `/about` - About the health tracker
 - `/search` - Search for activities (GET - display form)
 - `/search` - Search results (POST - display results)
@@ -43,7 +43,8 @@ A dynamic web application for tracking personal health and fitness activities, b
 - `/users/register` - User registration
 - `/users/login` - User login
 - `/users/logout` - Logout
-- `/users/audit` - View login audit history (requires login)
+
+**Note**: All routes are automatically prefixed with the BASE_PATH when deployed on the VM.
 
 ## Setup Instructions
 
@@ -76,11 +77,23 @@ A dynamic web application for tracking personal health and fitness activities, b
 4. **Configure environment variables**
    - Create a `.env` file in the root directory
    - Add the following variables (or use defaults):
+   
+   **For local development:**
    ```
    HEALTH_HOST=localhost
    HEALTH_USER=health_app
    HEALTH_PASSWORD=qwertyuiop
    HEALTH_DATABASE=health
+   HEALTH_BASE_PATH=
+   ```
+   
+   **For VM deployment (doc.gold.ac.uk):**
+   ```
+   HEALTH_HOST=localhost
+   HEALTH_USER=health_app
+   HEALTH_PASSWORD=qwertyuiop
+   HEALTH_DATABASE=health
+   HEALTH_BASE_PATH=/usr/260
    ```
 
 5. **Run the application**
@@ -89,7 +102,8 @@ A dynamic web application for tracking personal health and fitness activities, b
    ```
 
 6. **Access the application**
-   - Open your browser and navigate to `http://localhost:8000`
+   - **Locally**: Open your browser and navigate to `http://localhost:8000`
+   - **On VM**: Navigate to `https://www.doc.gold.ac.uk/usr/260/`
 
 ## Project Structure
 
@@ -125,7 +139,7 @@ The application uses the `dotenv` package to manage environment variables, which
 
 1. **Environment File**: A `.env` file in the root directory stores configuration variables:
    - Database credentials (host, user, password, database name)
-   - Server port number (optional)
+   - Base path for deployment (HEALTH_BASE_PATH)
    - Application settings
 
 2. **Loading Variables**: At application startup, `require('dotenv').config()` loads all variables from the `.env` file into `process.env`
@@ -136,11 +150,24 @@ The application uses the `dotenv` package to manage environment variables, which
    user: process.env.HEALTH_USER || 'health_app'
    ```
 
+### Base Path Configuration
+
+The application supports deployment in subdirectories using the `HEALTH_BASE_PATH` environment variable:
+
+- **Local Development**: Leave `HEALTH_BASE_PATH` empty or undefined - routes work from root (`/`)
+- **VM Deployment**: Set `HEALTH_BASE_PATH=/usr/260` - all routes are prefixed with `/usr/260`
+
+This is implemented throughout:
+- Route mounting in `index.js` uses `BASE_URL` prefix
+- All view templates use `<%= BASE_URL %>` for links and form actions
+- Redirect middleware uses `BASE_URL` for proper navigation
+
 ### Benefits
 - **Security**: Sensitive data (passwords, API keys) are kept out of source code
 - **Flexibility**: Different configurations for development, testing, and production environments
+- **Deployment**: Easy deployment to subdirectories without code changes
 - **Version Control**: The `.env` file should be added to `.gitignore` to prevent committing secrets
-- **Easy Deployment**: Environment variables can be easily changed without modifying code
+- **Easy Configuration**: Environment variables can be easily changed without modifying code
 
 **Important**: Never commit the `.env` file to version control. Add it to your `.gitignore` file.
 
