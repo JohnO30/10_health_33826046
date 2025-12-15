@@ -56,11 +56,11 @@ app.locals.siteData = {
 };
 
 // Base URL configuration (empty for local, /usr/260 on VM)
-const BASE_URL = process.env.HEALTH_BASE_PATH || '';
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '/';
 
 // Make BASE_URL available in all views
 app.use((req, res, next) => {
-  res.locals.BASE_URL = BASE_URL;
+  res.locals.BASE_URL = BASE_PATH;
   next();
 });
 
@@ -75,9 +75,9 @@ const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/users');
 const entryRoutes = require('./routes/entries');
 
-app.use(BASE_URL, mainRoutes);
-app.use(`${BASE_URL}/users`, userRoutes);
-app.use(`${BASE_URL}/entries`, entryRoutes);
+app.use(BASE_PATH, mainRoutes);
+app.use(`${BASE_PATH}/users`, userRoutes);
+app.use(`${BASE_PATH}/entries`, entryRoutes);
 
 // Start listening
 app.listen(port, () => {
