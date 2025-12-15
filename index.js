@@ -56,7 +56,7 @@ app.locals.siteData = {
 };
 
 // Base URL configuration (empty for local, /usr/260 on VM)
-const BASE_PATH = process.env.HEALTH_BASE_PATH || '/';
+const BASE_PATH = process.env.HEALTH_BASE_PATH || '';
 
 // Make BASE_URL available in all views
 app.use((req, res, next) => {
