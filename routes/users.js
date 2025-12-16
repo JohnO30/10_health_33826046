@@ -6,15 +6,14 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const router = express.Router();
 
-// Base URL from environment variable (empty for local, /usr/260 on VM)
-const BASE_URL = process.env.HEALTH_BASE_PATH || ''; 
+
 
 // --- Security Middleware Functions ---
 
 // Middleware to redirect to login if user is not logged in
 const redirectLogin = (req, res, next) => {
   if (!req.session.userId) {
-    res.redirect(BASE_URL + '/users/login');
+    res.redirect((req.app.locals.BASE_URL || '') + '/users/login');
   } else {
     next();
   }
@@ -23,7 +22,7 @@ const redirectLogin = (req, res, next) => {
 // Middleware to redirect to home if user is already logged in
 const redirectHome = (req, res, next) => {
   if (req.session.userId) {
-    res.redirect(BASE_URL);
+    res.redirect(req.app.locals.BASE_URL || '');
   } else {
     next();
   }
@@ -94,7 +93,7 @@ router.post('/registered',
         res.send(`
           <h2>Registration Successful</h2>
           <p>User ${req.body.username} has been registered successfully!</p>
-          <p><a href="${BASE_URL}/users/login">Login here</a> or <a href="${BASE_URL}">Go to Home</a></p>
+          <p><a href="${req.app.locals.BASE_URL || ''}/users/login">Login here</a> or <a href="${req.app.locals.BASE_URL || ''}">Go to Home</a></p>
         `);
       });
 
@@ -117,11 +116,14 @@ router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
   const sql = "SELECT id, username, hashedPassword FROM users WHERE username = ?";
+  console.log('Login attempt for:', username);
 
   db.query(sql, [username], async (err, results) => {
+    console.log('DB query finished');
     if (err) return next(err);
 
     if (results.length === 0) {
+      console.log('No user found');
       return res.render('login', {
         title: 'Login',
         error: 'Invalid username or password.'
@@ -129,30 +131,34 @@ router.post('/login', async (req, res, next) => {
     }
 
     const user = results[0];
-    const match = await bcrypt.compare(password, user.hashedPassword);
+    console.log('User found, starting bcrypt.compare');
+    bcrypt.compare(password, user.hashedPassword, function (err2, match) {
+      console.log('bcrypt.compare finished');
+      if (err2) {
+        console.log('bcrypt error:', err2);
+        return next(err2);
+      }
 
-    if (match) {
+      if (!match) {
+        console.log('Password does not match');
+        return res.render('login', {
+          title: 'Login',
+          error: 'Invalid username or password.'
+        });
+      }
+
       req.session.userId = user.id;
-      req.session.username = username;
-      res.redirect('/');
-    } else {
-      res.render('login', {
-        title: 'Login',
-        error: 'Invalid username or password.'
-      });
-    }
+      req.session.username = user.username;
+      console.log('Login successful, redirecting');
+      res.redirect(req.app.locals.BASE_URL || '/');
+    });
   });
 });
 
 // Logout
-router.get('/logout', redirectLogin, (req, res, next) => {
-  req.session.destroy(err => {
-    if (err) return next(err);
-    res.send(`
-      <h2>Logout Successful</h2>
-      <p>You have been successfully logged out.</p>
-      <p><a href="${BASE_URL}">Go to Home</a></p>
-    `);
+router.get('/logout', function (req, res) {
+  req.session.destroy(function () {
+    res.redirect(req.app.locals.BASE_URL || '');
   });
 });
 

@@ -75,10 +75,11 @@ const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/users');
 const entryRoutes = require('./routes/entries');
 
-app.use(BASE_PATH, mainRoutes);
-app.use(`${BASE_PATH}/users`, userRoutes);
-app.use(`${BASE_PATH}/entries`, entryRoutes);
-
+// Use BASE_PATH for all routes
+app.use(BASE_PATH + '/', mainRoutes);
+app.use(BASE_PATH + '/users', userRoutes);
+app.use(BASE_PATH + '/entries', entryRoutes);
+app.use(BASE_PATH + '/loggedin', require('./routes/loggedin'));
 // Start listening
 app.listen(port, () => {
   console.log(`HealthTrack app listening on port ${port}...`);
